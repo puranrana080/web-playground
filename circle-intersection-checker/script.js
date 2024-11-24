@@ -11,7 +11,7 @@ function logifintersection() {
     const r2 = secCircle.radius
 
     const d = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
-    
+
     if (d + r2 <= r1) {
         return "Circle 2 is inside Circle 1";
     }
@@ -25,32 +25,27 @@ function logifintersection() {
         return "Circles are touching";
     }
     return "Circles are not intersecting";
-
-    
 }
 
 
 window.addEventListener('click', (e) => {
-   
+
     const totalCircles = document.querySelectorAll('.circle')
     if (totalCircles.length === 2) {
         totalCircles.forEach(circ => {
             document.body.removeChild(circ)
             cirCoordinates.shift()
+            document.querySelector('p').textContent = ''
         })
     }
-   
 
     const x = e.clientX;
     const y = e.clientY;
 
-
-
-
-    const radius = Math.floor((Math.random() * 80) + 20)
+    const radius = Math.floor((Math.random() * 180) + 20)
     cirCoordinates.push({ x, y, radius })
 
-    // console.log("a am clicked at ", x, y, cirCoordinates)
+    // console.log("i am clicked at ", x, y, cirCoordinates)
 
     const circle = document.createElement('div')
     circle.classList.add('circle')
@@ -65,8 +60,7 @@ window.addEventListener('click', (e) => {
     if (cirCoordinates.length == 2) {
         const res = logifintersection()
         console.log(res)
+
+        document.querySelector('p').textContent = res
     }
-
-
-
 })
