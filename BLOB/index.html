@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using BLOB</title>
+</head>
+<style>
+    body{
+        text-align: center;
+    }
+    hr{
+        margin:5px
+    }
+</style>
+<body>
+    <h1>ClientSide File Generation and Download</h1>
+    <p>["Hello ", "i ", "am ", "downloaded "]</p>
+   <a id="downloadBtn" download="file.txt"> Donwload text Now</a>
+
+   <hr>
+   <hr>
+   <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>John Doe</td>
+            <td>28</td>
+            <td>New York</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Jane Smith</td>
+            <td>34</td>
+            <td>Los Angeles</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Alice Johnson</td>
+            <td>25</td>
+            <td>Chicago</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Bob Williams</td>
+            <td>40</td>
+            <td>Houston</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<br>
+   <a id="csv" download="file2.csv">Download CSV File</a>
+    <script src="script.js"></script>
+</body>
+</html>
