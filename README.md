@@ -30,3 +30,6 @@ Think of Yup as a tool to define “what your form data should look like.”
 
 4. **Higher Order Components**
    A Higher Order Component is a function that takes a component and returns a new component with additional props, logic, or features.
+
+5. **Custom hooks in react**
+   A custom hook is a reusable function that encapsulates logic used in multiple components. It allows us to extract common functionality, making the code cleaner and more maintainable.
