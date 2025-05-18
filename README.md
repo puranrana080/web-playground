@@ -44,3 +44,7 @@ A collection of small, interactive web projects built using HTML, CSS, and JavaS
    🟢 reducer: A function (state, action) => newState
    🟢 initialState: The starting state
    🟢 dispatch: A function to send actions to the reducer
+
+7. **Using Multerfor file upload**
+   Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+   
