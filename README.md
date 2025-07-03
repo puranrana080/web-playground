@@ -47,4 +47,11 @@ A collection of small, interactive web projects built using HTML, CSS, and JavaS
 
 7. **Using Multerfor file upload**
    Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+
+8. **Redux Core Concept**
+   create redux.demo.js
+   npm init -y
+   npm install redux
+
+
    
