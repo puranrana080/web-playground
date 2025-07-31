@@ -30,3 +30,13 @@ store.dispatch({type:'increment'})
 store.dispatch({type:'increment'})
 store.dispatch({type:'increment'})
 store.dispatch({type:'decrement'})
+
+const counterSubscriber = () => {
+  const latestState = store.getState();
+  console.log(latestState);
+};
+
+store.subscribe(counterSubscriber);
+
+store.dispatch({ type: "incrementBy2" });
+store.dispatch({ type: "decrementBy2" });
