@@ -54,4 +54,12 @@ A collection of small, interactive web projects built using HTML, CSS, and JavaS
    npm install redux
 
 
+8. **React Router DOM**
+   npx create-react-app my-router-app
+   cd my-react-app
+   npm i react-router-dom
+   Wrap App component in index.js with BrowserRouter
+
+
+
    
