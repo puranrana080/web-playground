@@ -1,0 +1,10 @@
+.post-title{
+    text-decoration: none;
+    color:black;
+    padding:10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.post-title:hover{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
