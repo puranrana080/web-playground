@@ -63,6 +63,16 @@ A collection of small, interactive web projects built using HTML, CSS, and JavaS
 10. **Formik and yup form-Validation**
    npx create-react-app formik-form-validation
    npm i formik yup
+
+
+
+11. **Material Ui**
+   npm install @mui/material @emotion/react @emotion/styled
+   * Typography
+   * Buttons
+   * Container
+   * Icons
+
    
 
 
