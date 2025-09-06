@@ -1,56 +1,54 @@
 import React from "react";
 import { Typography, Button, Container } from "@mui/material";
-import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import {makeStyles} from "@mui/styles"
-
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  btn:{
-    fontSize:60,
-    backgroundColor:'voilet',
-    '&:hover':{
-      backgroundColor:'blue'
-    }
+  btn: {
+    fontSize: 60,
+    backgroundColor: "voilet",
+    "&:hover": {
+      backgroundColor: "blue",
+    },
   },
-  title:{
-    textDecoration:'underline',
-    marginBottom:'20px'
-  }
-})
+  title: {
+    textDecoration: "underline",
+    marginBottom: "20px",
+  },
+});
 
 export default function Create() {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Container>
       <Typography
-      className={classes.title}
+        className={classes.title}
         variant="h6"
-        color="textSecondary"
+        color="secondary"
         component="h2"
         gutterBottom
       >
         Create a New Note
       </Typography>
       <Button
-      className={classes.btn}
+        className={classes.btn}
         type="submit"
         onClick={() => console.log("You clicked me")}
-        color="secondary"
+        color="primary"
         variant="contained"
-        endIcon={<KeyboardArrowRightIcon/>}
+        endIcon={<KeyboardArrowRightIcon />}
       >
         Submit
       </Button>
       {/* icons */}
-    <br/>
-      <AddCircleOutlinedIcon/>
-       <AddCircleOutlinedIcon color="secondary" fontSize="large"/>
-       <AddCircleOutlinedIcon color="secondary" fontSize="small"/>
-       <AddCircleOutlinedIcon color="action" fontSize="small"/>
-       <AddCircleOutlinedIcon color="error" fontSize="small"/>
-       <AddCircleOutlinedIcon color="disabled" fontSize="small"/>
-
+      <br />
+      <AddCircleOutlinedIcon />
+      <AddCircleOutlinedIcon color="secondary" fontSize="large" />
+      <AddCircleOutlinedIcon color="secondary" fontSize="small" />
+      <AddCircleOutlinedIcon color="action" fontSize="small" />
+      <AddCircleOutlinedIcon color="error" fontSize="small" />
+      <AddCircleOutlinedIcon color="disabled" fontSize="small" />
     </Container>
   );
 }
