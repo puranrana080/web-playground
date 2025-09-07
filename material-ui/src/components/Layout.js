@@ -1,6 +1,16 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Drawer, Typography, Box ,List,ListItem,ListItemIcon,ListItemText, ListItemButton} from "@mui/material";
+import {
+  Drawer,
+  Typography,
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemButton,
+  Tooltip,
+} from "@mui/material";
 import { AddCircleOutline, SubjectOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -12,18 +22,20 @@ const PageST = styled("div")({
 });
 
 const Layout = ({ children }) => {
-    const navigate = useNavigate()
-    const location =useLocation()
-    const menuItems = [{
-        text:"My Notes",
-        icon:<SubjectOutlined color="secondary"/>,
-        path:'/'
+  const navigate = useNavigate();
+  const location = useLocation();
+  const menuItems = [
+    {
+      text: "My Notes",
+      icon: <SubjectOutlined color="secondary" />,
+      path: "/",
     },
-{
-        text:"Create Notes",
-        icon:<AddCircleOutline color="secondary"/>,
-        path:'/create'
-    }]
+    {
+      text: "Create Notes",
+      icon: <AddCircleOutline color="secondary" />,
+      path: "/create",
+    },
+  ];
   return (
     <Box sx={{ display: "flex" }}>
       {/* App Bar */}
@@ -42,28 +54,34 @@ const Layout = ({ children }) => {
         }}
       >
         <div>
-          <Typography variant="h5">Ninja Notes</Typography>
+          <Typography sx={{ p: 3 }} variant="h5">
+            Ninja Notes
+          </Typography>
         </div>
         {/* list /links */}
         <List>
-        {menuItems.map(item=>(
-            <ListItem key={item.text} onClick={()=>navigate(item.path)} className={location.pathname===item.path?"active":""} sx={{
-            cursor: "pointer",
-            "&.active": {
-              backgroundColor: "#d3d3d3",
-              fontWeight: "bold",
-              borderRight:'5px solid red'
-            },
-          }} >
+          {menuItems.map((item) => (
+            <Tooltip key={item.text} title={item.text} placement="right" arrow>
+              <ListItem
+                onClick={() => navigate(item.path)}
+                className={location.pathname === item.path ? "active" : ""}
+                sx={{
+                  cursor: "pointer",
+                  "&.active": {
+                    backgroundColor: "#d3d3d3",
+                    fontWeight: "bold",
+                    borderRight: "5px solid red",
+                  },
+                }}
+              >
                 <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
                 </ListItemButton>
-            </ListItem>
-        ))}
-
+              </ListItem>
+            </Tooltip>
+          ))}
         </List>
-       
       </Drawer>
 
       <PageST>{children}</PageST>
