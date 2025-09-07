@@ -1,28 +1,39 @@
 import React, { useState } from "react";
-import { Typography, Button, Container, TextField } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Container,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
+  FormControl,
+} from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 export default function Create() {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
 
-    const [titleErr, setTitleErr] = useState(false);
+  const [titleErr, setTitleErr] = useState(false);
   const [detailsErr, setDetailsErr] = useState(false);
+  const [category, setCategory] = useState("todos");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTitleErr(false)
-    setDetailsErr(false)
-    if(title===''){
-      setTitleErr(true)
+    setTitleErr(false);
+    setDetailsErr(false);
+    if (title === "") {
+      setTitleErr(true);
     }
-     if(details===''){
-      setDetailsErr(true)
+    if (details === "") {
+      setDetailsErr(true);
     }
 
     if (title && details) {
-      console.log(title, details);
-    } 
+      console.log(title, details, category);
+    }
   };
 
   return (
@@ -59,6 +70,24 @@ export default function Create() {
           required
           error={detailsErr}
         ></TextField>
+
+        <FormControl sx={{ mt: 2, mb: 2, display: "block" }}>
+          <FormLabel>Note Category</FormLabel>
+          <RadioGroup
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <FormControlLabel value="money" control={<Radio />} label="Money" />
+            <FormControlLabel value="todos" control={<Radio />} label="Todos" />
+            <FormControlLabel
+              value="remainders"
+              control={<Radio />}
+              label="Remainders"
+            />
+            <FormControlLabel value="work" control={<Radio />} label="Work" />
+          </RadioGroup>
+        </FormControl>
+
         <Button
           type="submit"
           color="primary"
