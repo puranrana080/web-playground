@@ -8,7 +8,7 @@ import Layout from "./components/Layout";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#dd9d42ff",
+      main: "#35871aff",
     },
     secondary: purple,
   },

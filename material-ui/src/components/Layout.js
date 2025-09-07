@@ -10,16 +10,24 @@ import {
   ListItemText,
   ListItemButton,
   Tooltip,
+  AppBar,
+  Toolbar,
 } from "@mui/material";
 import { AddCircleOutline, SubjectOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
-const PageST = styled("div")({
+// const PageST = styled("div")({
+//   backgroundColor: "#f9f9f9",
+//   width: "100%",
+// });
+const PageST = styled("main")(({ theme }) => ({
   backgroundColor: "#f9f9f9",
-  width: "100%",
-});
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  minHeight: "100vh",
+}));
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -39,6 +47,17 @@ const Layout = ({ children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       {/* App Bar */}
+      <AppBar elevation={0} position="fixed" sx={{width:`calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`}}>
+        <Toolbar>
+            <Typography sx={{display:'flex',flexGrow:1}}>
+            Today is {new Date().toDateString()}
+            </Typography>
+            <Typography>
+                Puran
+            </Typography>
+        </Toolbar>
+      </AppBar>
+
 
       {/* Side drawbar */}
       <Drawer
@@ -84,7 +103,11 @@ const Layout = ({ children }) => {
         </List>
       </Drawer>
 
-      <PageST>{children}</PageST>
+      <PageST>
+        <Toolbar/>
+       
+        {children}
+        </PageST>
     </Box>
   );
 };
