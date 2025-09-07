@@ -12,9 +12,11 @@ import {
   Tooltip,
   AppBar,
   Toolbar,
+  Avatar
 } from "@mui/material";
 import { AddCircleOutline, SubjectOutlined } from "@mui/icons-material";
 import { useLocation, useNavigate } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -55,6 +57,7 @@ const Layout = ({ children }) => {
             <Typography>
                 Puran
             </Typography>
+            <Avatar src="mario-av.png" sx={{ml:2}} />
         </Toolbar>
       </AppBar>
 
