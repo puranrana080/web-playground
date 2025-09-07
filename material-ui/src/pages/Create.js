@@ -11,8 +11,10 @@ import {
   FormControl,
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import{ useNavigate }from "react-router-dom"
 
 export default function Create() {
+  const navigate = useNavigate()
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
 
@@ -32,7 +34,11 @@ export default function Create() {
     }
 
     if (title && details) {
-      console.log(title, details, category);
+      fetch('http://localhost:8000/notes',{
+        method:'POST',
+        headers:{'Content-type':"application/json"},
+        body:JSON.stringify({title,details,category})
+      }).then(()=> navigate('/'))
     }
   };
 
