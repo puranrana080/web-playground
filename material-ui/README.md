@@ -26,5 +26,10 @@ You'll also need to install Material UI as a dependency. To do this run **npm in
    json-server --watch data.db.json --port 8000
    here we created new note in db and displayed
 
+**Drawer component**
+   * import Drawer and Typography component
+  
+
+
    
 
