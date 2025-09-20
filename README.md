@@ -74,6 +74,14 @@ A collection of small, interactive web projects built using HTML, CSS, and JavaS
    * Icons
    * makeStyles hook
 
+12. **Calender implementation**
+   * npm create vite@latest . (use . to initialize in current folder)
+   * npm install @mui/material @mui/icons-material @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/interaction redux @reduxjs/toolkit react-redux
+   
+
+
+   
+
    
 
 
