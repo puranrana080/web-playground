@@ -1,10 +1,13 @@
-import {configureStore} from "@reduxjstoolkit/"
+import { configureStore } from "@reduxjs/toolkit"
 import doctorReducer from "./doctorSlice"
-import calenderReducer from "./doctorSlice"
+import calendarReducer from "./calendarSlice"
 
 export const store = configureStore({
     reducer:{
         doctor:doctorReducer,
-        calender:calenderReducer,
+        calendar:calendarReducer,
     }
 })
+
+
+

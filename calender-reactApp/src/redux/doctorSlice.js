@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
-const initialValues = {
+const initialState = {
     selectedDoctor:null,
     doctors:[
         { id: 1, name: "Dr. A" },
@@ -19,4 +19,4 @@ const doctorSlice = createSlice({
 })
 
 export const {setSelectedDoctor} = doctorSlice.actions
-export default doctorSlice;
+export default doctorSlice.reducer;
