@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 
 const AvailabilityModal = ({ open, onClose, onSave }) => {
-  // const [status, setStatus] = useState("Available");
 
   return (
     <Dialog
       open={open}
       onClose={onClose}
       maxWidth="xs"
+      
+    
       // fullWidth 
       slotProps={{
         paper: {
@@ -36,7 +37,7 @@ const AvailabilityModal = ({ open, onClose, onSave }) => {
       <DialogTitle sx={{ textAlign: "center", width: "100%" }}>
         Set your Availability
       </DialogTitle>
-      <DialogContent sx={{
+      <DialogContent  sx={{
           display: "flex",
           justifyContent: "center",
           gap: 2,
