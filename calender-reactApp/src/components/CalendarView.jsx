@@ -17,9 +17,9 @@ const CalendarView = () => {
   const { selectedDoctor } = useSelector((state) => state.doctor);
   const [selectedRange, setSelectedRange] = useState(null);
   const [availabilityModalOpen, setAvailabilityModalOpen] = useState(false);
-  const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
+  // const [appointmentModalOpen, setAppointmentModalOpen] = useState(false);
 
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  // const [selectedEvent, setSelectedEvent] = useState(null);
   const [viewType, setViewType] = useState("timeGridWeek");
 
   const filteredEvents = selectedDoctor
@@ -35,11 +35,11 @@ const CalendarView = () => {
         const key = `${ev.doctorId}-${date}-${ev.title}`;
 
         if (!grouped[key]) {
-         
-          
           grouped[key] = {
             start: date,
-             end: new Date(new Date(date).getTime() + 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+            end: new Date(new Date(date).getTime() + 24 * 60 * 60 * 1000)
+              .toISOString()
+              .split("T")[0],
             title:
               ev.title.toLowerCase() === "available"
                 ? "Available"
@@ -55,11 +55,12 @@ const CalendarView = () => {
       return Object.values(grouped);
     }
 
-    return events.map(ev => ({
-    ...ev,
-    allDay: false, // important for week/day to render correctly
-    extendedProps: {...ev.extendedProps, virtual: false},
-  }));  };
+    return events.map((ev) => ({
+      ...ev,
+      allDay: false,
+      extendedProps: { ...ev.extendedProps, virtual: false },
+    }));
+  };
 
   const handleSelect = (selectInfo) => {
     const now = new Date();
@@ -69,17 +70,17 @@ const CalendarView = () => {
       return;
     }
     let start = new Date(selectInfo.start);
-  let end = new Date(selectInfo.end);
+    let end = new Date(selectInfo.end);
 
-  if (viewType === "dayGridMonth") {
-    const [startHour, startMin] = slotMinTime.split(":").map(Number);
-    const [endHour, endMin] = slotMaxTime.split(":").map(Number);
+    if (viewType === "dayGridMonth") {
+      const [startHour, startMin] = slotMinTime.split(":").map(Number);
+      const [endHour, endMin] = slotMaxTime.split(":").map(Number);
 
-    start.setHours(startHour, startMin, 0, 0);
-    end.setHours(endHour, endMin, 0, 0);
-  }
+      start.setHours(startHour, startMin, 0, 0);
+      end.setHours(endHour, endMin, 0, 0);
+    }
 
-    setSelectedRange({start,end});
+    setSelectedRange({ start, end });
     setAvailabilityModalOpen(true);
   };
 
@@ -88,69 +89,71 @@ const CalendarView = () => {
     let end = new Date(selectedRange.end);
 
     if (viewType === "dayGridMonth") {
-      // const [startHour, startMin] = slotMinTime.split(":").map(Number);
-      // const [endHour, endMin] = slotMaxTime.split(":").map(Number);
+      const [startHour, startMin] = slotMinTime.split(":").map(Number);
+      const [endHour, endMin] = slotMaxTime.split(":").map(Number);
 
-      // start.setHours(startHour, startMin, 0, 0);
-      // end.setHours(endHour, endMin, 0, 0);
+      let slotStart = new Date(start);
+      slotStart.setHours(startHour, startMin, 0, 0);
 
-      // end.setSeconds(end.getSeconds() - 1);
-      end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
-      dispatch(
-      addEvent({
-        title: status,
-        start: start.toISOString().split("T")[0],
-        end: end.toISOString().split("T")[0],   
-        doctorId: selectedDoctor.id,
-        color: status === "available" ? "#d8fabaff" : "#eedfdfff",
-        textColor: status === "available" ? "#000" : "#fff",
-        allDay: true,
-      })
-    );
-    }
-    else{
-       if (status === "available") {
-        let tempStart = new Date(start);
-      while (tempStart < end) {
-        const slotEnd = new Date(tempStart.getTime() + duration * 60 * 1000);
-        if (slotEnd > end) break;
+      const slotEnd = new Date(start);
+      slotEnd.setHours(endHour, endMin, 0, 0);
+
+      while (slotStart < slotEnd) {
+        const nextSlot = new Date(slotStart.getTime() + duration * 60 * 1000);
+        if (nextSlot > slotEnd) break;
+
         dispatch(
           addEvent({
             title: status,
-            start: tempStart.toISOString(),
-            end: slotEnd.toISOString(),
+            start: slotStart.toISOString(),
+            end: nextSlot.toISOString(),
             doctorId: selectedDoctor.id,
-            color: status === "available" ? "#d8fabaff" : "#eedfdfff",
-            textColor: status === "available" ? "#000" : "#fff",
+            color: status === "available" ? "#d8fabaff" : "#999999",
+            textColor: status === "available" ? "#000" : "#7b1616ff",
           })
         );
-        tempStart = slotEnd;
+
+        slotStart = nextSlot;
       }
     } else {
-      dispatch(
-        addEvent({
-          title: status,
-          start: start.toISOString(),
-          end: end.toISOString(),
-          doctorId: selectedDoctor.id,
-          color: "#999999",
-          textColor: "#fff",
-        })
-      );
+      if (status === "available") {
+        let tempStart = new Date(start);
+        while (tempStart < end) {
+          const slotEnd = new Date(tempStart.getTime() + duration * 60 * 1000);
+          if (slotEnd > end) break;
+          dispatch(
+            addEvent({
+              title: status,
+              start: tempStart.toISOString(),
+              end: slotEnd.toISOString(),
+              doctorId: selectedDoctor.id,
+              color: status === "available" ? "#d8fabaff" : "#aa2f2fff",
+              textColor: status === "available" ? "#000" : "#aa2f2fff",
+            })
+          );
+          tempStart = slotEnd;
+        }
+      } else {
+        dispatch(
+          addEvent({
+            title: status,
+            start: start.toISOString(),
+            end: end.toISOString(),
+            doctorId: selectedDoctor.id,
+            color: "#e1b9a7ff",
+            textColor: "#aa2f2fff",
+          })
+        );
+      }
     }
-
-    
-  }
-  setAvailabilityModalOpen(false);
-  calendarRef.current.getApi().unselect();
-
-   
+    setAvailabilityModalOpen(false);
+    calendarRef.current.getApi().unselect();
   };
 
   const handleEventClick = (info) => {
     console.log(info.event.start, info.event.end);
-    setSelectedEvent(info.event);
-    setAppointmentModalOpen(true);
+    // setSelectedEvent(info.event);
+    // setAppointmentModalOpen(true);
   };
 
   return (
@@ -187,72 +190,24 @@ const CalendarView = () => {
           headerToolbar={{
             left: "prev timeGridDay,timeGridWeek,dayGridMonth next",
             center: "title",
-            right: "legendButton",
+            right: "legend",
           }}
           customButtons={{
-            legendButton: {
-              text: "🟢 Available 🔴  Unavailable",
+            legend: {
+              text: "🟩 Available 🟥 Booked 🟧 Pending 🟫 Unavailable ",
               click: () => {},
             },
-            hint: "legend",
+            // hint: "legend",
           }}
           selectable={true}
           select={handleSelect}
           allDaySlot={false}
           events={processEvents(filteredEvents, viewType)}
           dayCellContent={(arg) => {
-            // Default date text
             return {
               html: `<div class="fc-day-number">${arg.dayNumberText}</div>`,
             };
           }}
-          // eventContent={(arg) => {
-          //   if (viewType === "dayGridMonth") {
-          //     return (
-          //       <div
-          //         style={{
-          //           display: "flex",
-          //           alignItems: "center",
-          //           justifyContent: "space-between",
-          //           backgroundColor: arg.event.backgroundColor,
-          //           borderRadius: "3px",
-          //           padding: "2px 4px",
-          //           fontSize: "12px",
-          //           color: arg.event.textColor,
-          //           marginBottom: "2px",
-          //         }}
-          //       >
-          //         <span>
-          //           {arg.event.title === "available"
-          //             ? "Available"
-          //             : "Unavailable"}
-          //         </span>
-          //         <span>👤</span>
-          //       </div>
-          //     );
-          //   } else {
-          //     return (
-          //       <div
-          //         style={{
-          //           position: "relative",
-          //           width: "100%",
-          //           height: "100%",
-          //         }}
-          //       >
-          //         <span
-          //           style={{
-          //             position: "absolute",
-          //             bottom: 2,
-          //             right: 2,
-          //             fontSize: "14px",
-          //           }}
-          //         >
-          //           👤
-          //         </span>
-          //       </div>
-          //     );
-          //   }
-          // }}
           eventContent={(arg) => {
             if (arg.event.extendedProps.virtual) {
               return (
@@ -273,7 +228,6 @@ const CalendarView = () => {
                 </div>
               );
             } else {
-              // real time-slot event
               return (
                 <div
                   style={{
